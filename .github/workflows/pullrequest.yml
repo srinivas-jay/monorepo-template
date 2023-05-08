@@ -1,0 +1,43 @@
+name: Build Job on Pull Request to main
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  main:
+    name: Main job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: setup git config and track main branch
+        run: |
+          git config user.name "GitHub Cloud Actions Bot"
+          git config user.email "<srini.j135@gmail.com>"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.16.0
+          registry-url: "https://npm.pkg.github.com"
+          scope: "@inscriptors"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install dependencies
+        run: |
+          yarn install
+          npm install -g lerna
+          npm install -g nx 
+          npm install -g @nrwl/nx-cloud
+
+      - name: Lint
+        run: lerna run lint --since origin/main
+
+      - name: Build
+        run: lerna run build --since origin/main

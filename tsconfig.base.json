@@ -1,0 +1,25 @@
+{
+	"compilerOptions": {
+		"sourceMap": true,
+		"declarationMap": true,
+		"strict": true,
+		"removeComments": true,
+		"resolveJsonModule": true,
+		"jsx": "react-jsx",
+		"esModuleInterop": true,
+		"allowJs": true,
+		"allowSyntheticDefaultImports": true,
+		"moduleResolution": "nodenext",
+		"skipLibCheck": true,
+		"skipDefaultLibCheck": true,
+		"experimentalDecorators": true,
+		"declaration": true,
+		"emitDecoratorMetadata": true,
+		"importHelpers": true,
+		"target": "ES2020",
+		"module": "ES2020"
+	},
+	"exclude": [
+		"node_modules"
+	]
+}
