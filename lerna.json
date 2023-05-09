@@ -5,7 +5,9 @@
   "useWorkspaces": true,
   "version": "0.0.0",
   "packages": [
-    "apps/**"
+    ".",
+    "apps/*",
+    "libs/*"
   ],
   "command": {
     "version": {
