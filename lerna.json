@@ -3,7 +3,7 @@
 	"$schema": "node_modules/lerna/schemas/lerna-schema.json",
 	"useNx": true,
 	"useWorkspaces": true,
-	"version": "1.0.0-alpha.0",
+	"version": "1.0.0",
 	"packages": [".", "apps/*", "libs/*"],
 	"command": {
 		"version": {
