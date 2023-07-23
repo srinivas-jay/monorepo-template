@@ -1,10 +1,8 @@
 {
-	"npmClient": "yarn",
+	"npmClient": "pnpm",
 	"$schema": "node_modules/lerna/schemas/lerna-schema.json",
 	"useNx": true,
-	"useWorkspaces": true,
-	"version": "1.0.0",
-	"packages": [".", "apps/*", "libs/*"],
+	"version": "independent",
 	"command": {
 		"version": {
 			"conventionalCommits": true,

@@ -1,15 +1,19 @@
 {
 	"name": "monorepo-template",
-	"version": "1.0.0",
 	"private": true,
+	"homepage": "https://github.com/inscriptors/turbo-mono-repo#readme",
+	"bugs": {
+		"url": "https://github.com/inscriptors/turbo-mono-repo/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/inscriptors/turbo-mono-repo.git"
+	},
 	"license": "MIT",
-	"workspaces": [
-		".",
-		"apps/*",
-		"libs/*"
-	],
 	"scripts": {
-		"prepare": "husky install"
+		"prepare": "husky install",
+		"publish-packages": "nx run-many --target=release",
+		"version-packages": "npx lerna version --conventional-commits --yes --no-push"
 	},
 	"lint-staged": {
 		"**/*.{js,jsx,ts,tsx}": [
@@ -23,33 +27,23 @@
 		}
 	},
 	"devDependencies": {
-		"@commitlint/cli": "^17.6.3",
-		"@commitlint/config-conventional": "^17.6.3",
-		"@commitlint/config-lerna-scopes": "^17.6.3",
-		"@commitlint/config-nx-scopes": "^17.6.4",
-		"@inscriptors/configs": "1.0.0-alpha.4",
-		"@nrwl/eslint-plugin-nx": "^16.1.3",
-		"@nx/workspace": "16.1.3",
-		"@types/node": "^20.1.1",
-		"@typescript-eslint/eslint-plugin": "^5.59.5",
-		"@typescript-eslint/parser": "^5.59.5",
+		"@commitlint/cli": "^17.6.7",
+		"@commitlint/config-conventional": "^17.6.7",
+		"@inscriptors/eslint-config": "workspace:*",
+		"@types/node": "^20.4.4",
 		"commitizen": "^4.3.0",
-		"concurrently": "^8.0.1",
+		"commitlint-plugin-workspace-scopes": "^1.1.0",
 		"cz-conventional-changelog": "^3.3.0",
-		"eslint": "^8.40.0",
-		"eslint-config-prettier": "^8.8.0",
-		"eslint-plugin-import": "^2.27.5",
-		"eslint-plugin-prettier": "^4.2.1",
-		"eslint-plugin-react": "^7.32.2",
-		"eslint-plugin-react-hooks": "^4.6.0",
+		"eslint": "^8.45.0",
 		"husky": "^8.0.3",
-		"lerna": "^6.6.2",
-		"lint-staged": "^13.2.2",
-		"nx": "^16.1.3",
-		"prettier": "^2.8.8",
-		"prop-types": "^15.8.1",
-		"rimraf": "^5.0.0",
-		"ts-node": "^10.9.1",
-		"typescript": "^5.0.4"
-	}
+		"lerna": "^7.1.4",
+		"lint-staged": "^13.2.3",
+		"nx": "^16.5.5",
+		"prettier": "^3.0.0"
+	},
+	"engines": {
+		"node": ">=18",
+		"pnpm": ">=8"
+	},
+	"engineStrict": true
 }

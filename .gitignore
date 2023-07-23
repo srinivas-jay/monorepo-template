@@ -2,13 +2,17 @@
 
 # compiled output
 dist
-bundles
-tmp
+dist-single-spa
 dist-storybook
+tmp
 /out-tsc
+temp
+*.tsbuildinfo
 
 # dependencies
 node_modules
+.pnp
+.pnp.js
 
 # IDEs and editors
 /.idea
@@ -29,19 +33,35 @@ node_modules
 # misc
 /.sass-cache
 /connect.lock
-/coverage
 /libpeerconnection.log
-npm-debug.log
-yarn-error.log
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 testem.log
+
 /typings
-*.tsbuildinfo
-*.cache
 
 # System Files
 .DS_Store
+*.pem
 Thumbs.db
-.eslintcache
 
-# Next.js
-.next
+# next.js
+.next/
+out/
+build
+
+# testing
+coverage
+
+# local env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# vercel
+.vercel

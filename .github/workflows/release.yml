@@ -1,0 +1,68 @@
+name: Build and deploy release packages on Merge to main
+
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+        types:
+            - closed
+        branches:
+            - main
+jobs:
+    main:
+        name: Main job
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+              with:
+                  fetch-depth: 0
+
+            - name: setup git config and track main branch
+              run: |
+                  git config user.name "ACTIONS_AUTOBOTS"
+                  git config user.email "<srini.j135@gmail.com>"
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version-file: '.nvmrc'
+                  registry-url: 'https://npm.pkg.github.com'
+                  scope: '@inscriptors'
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.ACTIONS_AUTOBOTS }}
+
+            - name: Install pnpm
+              uses: pnpm/action-setup@v2
+              with:
+                  version: latest
+                  run_install: false
+
+            - name: Get pnpm store directory
+              id: pnpm-cache
+              shell: bash
+              run: |
+                  echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+            - name: setup pnpm cache
+              uses: actions/cache@v3
+              with:
+                  key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+                  path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+                  restore-keys: |
+                      ${{ runner.os }}-pnpm-store-
+
+            - name: Install dependencies
+              run: pnpm install
+
+            - name: Create Release Pull Request or Publish to Github Registry
+              uses: inscriptors/lerna-autobot@v1
+              with:
+                  github-token: ${{ secrets.ACTIONS_AUTOBOTS }}
+                  version-command: 'pnpm version-packages'
+                  publish-command: 'pnpm publish-packages'
+                  commit-msg: 'chore(release): publish'
+                  commit-title: 'chore(release): version Packages'
+                  branch-name: 'release/packages'
+                  user-name: 'ACTIONS_AUTOBOTS'
