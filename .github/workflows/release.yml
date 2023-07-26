@@ -66,3 +66,4 @@ jobs:
                   commit-title: 'chore(release): version Packages'
                   branch-name: 'release/packages'
                   user-name: 'ACTIONS_AUTOBOTS'
+                  user-email: 'srini.j135@gmail.com'
