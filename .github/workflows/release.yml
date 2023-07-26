@@ -4,11 +4,6 @@ on:
     push:
         branches:
             - main
-    pull_request:
-        types:
-            - closed
-        branches:
-            - main
 jobs:
     main:
         name: Main job
@@ -23,15 +18,6 @@ jobs:
               run: |
                   git config user.name "ACTIONS_AUTOBOTS"
                   git config user.email "<srini.j135@gmail.com>"
-
-            - name: Setup Node.js
-              uses: actions/setup-node@v3
-              with:
-                  node-version-file: '.nvmrc'
-                  registry-url: 'https://npm.pkg.github.com'
-                  scope: '@inscriptors'
-              env:
-                  NODE_AUTH_TOKEN: ${{ secrets.ACTIONS_AUTOBOTS }}
 
             - name: Install pnpm
               uses: pnpm/action-setup@v2
@@ -55,14 +41,3 @@ jobs:
 
             - name: Install dependencies
               run: pnpm install
-
-            - name: Create Release Pull Request or Publish to Github Registry
-              uses: inscriptors/lerna-autobot@v1
-              with:
-                  github-token: ${{ secrets.ACTIONS_AUTOBOTS }}
-                  version-command: 'pnpm version-packages'
-                  publish-command: 'pnpm publish-packages'
-                  commit-msg: 'chore(release): publish'
-                  commit-title: 'chore(release): version Packages'
-                  user-name: 'ACTIONS_AUTOBOTS'
-                  user-email: 'srini.j135@gmail.com'

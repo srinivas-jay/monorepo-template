@@ -1,6 +1,6 @@
 {
     "name": "@inscriptors/eslint-config",
-    "version": "0.1.0",
+    "version": "0.0.0",
     "description": "This is a common eslint configs for all the package",
     "keywords": [
         "eslint",
@@ -31,8 +31,5 @@
         "next": "^13.4.12",
         "prettier": "^3.0.0",
         "typescript": "^5.1.6"
-    },
-    "publishConfig": {
-        "registry": "https://npm.pkg.github.com"
     }
 }
